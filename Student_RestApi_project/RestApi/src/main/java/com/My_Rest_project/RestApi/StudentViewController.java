@@ -2,6 +2,8 @@ package com.My_Rest_project.RestApi;
 
 import com.My_Rest_project.RestApi.Service.StudentService;
 import com.My_Rest_project.RestApi.model.Student;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,12 @@ public class StudentViewController {
 
     // Handle add student form submission
     @PostMapping("/add")
-    public String addStudent(@ModelAttribute Student student) {
+    public String addStudent(@Valid @ModelAttribute Student student, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            // keep the entered data and show validation messages
+            model.addAttribute("student", student);
+            return "add-student";
+        }
         service.addStudent(student);
         return "redirect:/students-view";
     }
@@ -38,15 +45,19 @@ public class StudentViewController {
     // Show edit student form for a specific roll
     @GetMapping("/edit/{roll}")
     public String editStudentPage(@PathVariable int roll, Model model) {
-        Student student = service.getStudById(roll);
+        Student student = service.getStudById(roll)
+                .orElseThrow(() -> new RuntimeException("Student not found with roll: " + roll));
         model.addAttribute("student", student);
         return "edit-student";
     }
 
     // Handle edit student form submission
     @PostMapping("/edit/{roll}")
-    public String editStudent(@PathVariable int roll, @ModelAttribute Student student) {
-        // The roll field is read‑only in the form; ensure it matches the path variable
+    public String editStudent(@PathVariable int roll, @Valid @ModelAttribute Student student, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("student", student);
+            return "edit-student";
+        }
         service.updateStudent(student);
         return "redirect:/students-view";
     }
