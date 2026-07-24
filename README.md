@@ -2,6 +2,11 @@
 
 A Spring Boot & Thymeleaf-based Student Management System migrated from an in-memory storage implementation (`ArrayList`) to a persistent **PostgreSQL** relational database using **Spring Data JPA**. It features a modern layout with responsive styles and dynamic, non-reloading live search.
 
+
+<img width="1919" height="909" alt="Screenshot 2026-07-24 201415" src="https://github.com/user-attachments/assets/605c5e74-9f41-4cf6-922c-bc28ace3a3c4" />
+
+<img width="1870" height="885" alt="Screenshot 2026-07-24 201440" src="https://github.com/user-attachments/assets/78062f30-921d-431a-acd6-63da21676550" />
+
 ---
 
 ![Java](https://img.shields.io/badge/Java-17-blue)
