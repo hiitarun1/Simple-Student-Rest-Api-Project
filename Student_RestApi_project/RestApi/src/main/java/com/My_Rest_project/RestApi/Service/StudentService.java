@@ -11,29 +11,28 @@ public class StudentService {
 
    private final StudentRepo repo;
 
-   //constructor injection
-   StudentService (StudentRepo repo){
-       this.repo=repo;
+    StudentService (StudentRepo repo){
+        this.repo=repo;
     }
 
     public List<Student> getAllStudents(){
-       return repo.getAllStudents();
+        return repo.getAllStudents();
     }
 
 
     public Student getStudById(int id) {
-       return repo.getStudById(id);
+        return repo.getStudById(id);
     }
 
     public void addStudent(Student addstud) {
-       repo.addStudent(addstud);
+        repo.addStudent(addstud);
     }
 
     public void updateStudent(Student stud) {
-       repo.updateStudent(stud);
+        repo.updateStudent(stud);
     }
 
     public void deleteStudent(int id) {
-       repo.deleteStudent(id);
+        repo.deleteStudent(id);
     }
 }

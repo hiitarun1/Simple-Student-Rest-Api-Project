@@ -2,44 +2,46 @@ package com.My_Rest_project.RestApi;
 
 import com.My_Rest_project.RestApi.Service.StudentService;
 import com.My_Rest_project.RestApi.model.Student;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@ResponseBody
+@RequestMapping("/api/students")
 public class StudentController {
 
     private final StudentService service;
-    public StudentController(StudentService service){
-        this.service=service;
+
+    public StudentController(StudentService service) {
+        this.service = service;
     }
-    @GetMapping("/student")
-    public List<Student> showAllStudents(){
+
+    @GetMapping
+    public List<Student> getAllStudents() {
         return service.getAllStudents();
     }
 
-    @GetMapping("/student/{id}")
-    public Student getStudentById(@PathVariable int id){
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable int id) {
         return service.getStudById(id);
-
     }
 
-    @PostMapping("/student")
-    public String AddStudent(@RequestBody Student addstud){
-        service.addStudent(addstud);
-        return "student added successfully";
+    @PostMapping
+    public String addStudent(@RequestBody Student student) {
+        service.addStudent(student);
+        return "Student added successfully";
     }
 
-    @PutMapping("/student")
-    public String updateStudent(@RequestBody Student stud){
-        service.updateStudent(stud);
-        return "updted";
+    @PutMapping
+    public String updateStudent(@RequestBody Student student) {
+        service.updateStudent(student);
+        return "Student updated successfully";
     }
 
-    @DeleteMapping("/student/{id}")
-    public String deleteStudent(@PathVariable int id){
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable int id) {
         service.deleteStudent(id);
-        return "student deleted successfully";
+        return "Student deleted successfully";
     }
 }

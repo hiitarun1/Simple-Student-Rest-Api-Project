@@ -1,60 +1,27 @@
 package com.My_Rest_project.RestApi.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import lombok.*;
 
-//@AllArgsConstructor
-//@NoArgsConstructor
-//@Getter
-//@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Student {
 
+    @Positive(message = "Roll number must be positive")
+    private int roll;
 
-    public int roll;
-    public String name;
-    public String email;
-    float marks;
+    @NotBlank(message = "Name is required")
+    private String name;
 
-    public Student(int roll, String name, String email, float marks ) {
-        this.roll = roll;
-        this.marks = marks;
-        this.email = email;
-        this.name = name;
-    }
+    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email is required")
+    private String email;
 
-    public int getRoll() {
-        return roll;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public float getMarks() {
-        return marks;
-    }
-
-
-    public void setRoll(int roll) {
-        this.roll = roll;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setMarks(float marks) {
-        this.marks = marks;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    @NotNull(message = "Marks are required")
+    private Float marks;
 }

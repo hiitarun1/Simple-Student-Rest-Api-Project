@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Add Student</title>
+
+    <link rel="icon" type="image/png" th:href="@{/favicon.jpg}" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container my-4">
+
+    <div th:replace="fragments/alerts :: alerts"></div>
+
+    <h2 class="mb-3">Add New Student</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <form th:action="@{/students-view/add}"
+                  th:object="${student}"
+                  method="post">
+
+                <div class="mb-3">
+                    <label for="roll" class="form-label">Roll</label>
+                    <input type="number"
+                           class="form-control"
+                           id="roll"
+                           th:field="*{roll}"
+                           placeholder="Enter roll number">
+
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('roll')}"
+                         th:errors="*{roll}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           th:field="*{name}"
+                           placeholder="Enter name">
+
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('name')}"
+                         th:errors="*{name}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email"
+                           class="form-control"
+                           id="email"
+                           th:field="*{email}"
+                           placeholder="Enter email">
+
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="marks" class="form-label">Marks</label>
+                    <input type="number"
+                           step="0.01"
+                           class="form-control"
+                           id="marks"
+                           th:field="*{marks}"
+                           placeholder="Enter marks">
+
+                    <div class="text-danger mt-1"
+                         th:if="${#fields.hasErrors('marks')}"
+                         th:errors="*{marks}">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    Add Student
+                </button>
+
+                <a th:href="@{/students-view}"
+                   class="btn btn-secondary ms-2">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
